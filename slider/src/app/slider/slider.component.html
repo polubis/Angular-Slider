@@ -1,0 +1,19 @@
+
+<div class="slider-container">
+    <div #slider class="slider" [ngStyle]="{'background-image':'url(' + bg + ')'}" >
+      <div *ngFor="let item of sliderItems" class="slide">
+        <img class="loading-image" [src]="item.src" appSlide />
+      </div>
+    </div>
+    <button [disabled]="(onScroll$ | async)" *ngIf="currentScrollState > initialClientWidth" class="btn-left" (click)="onClickLeftButton(slider)">
+        <i class="material-icons">chevron_left</i>
+    </button>
+    <button [disabled]="(onScroll$ | async)" *ngIf="currentScrollState < maxScrollState" class="btn-right" (click)="onClickRightButton(slider)">
+        <i class="material-icons">chevron_right</i>
+    </button>
+</div>
+
+<div class="dots-container">
+  <button [disabled]="(onScroll$ | async)" (click)="scrollByDotClick(i)" class="dot" *ngFor="let page of pages; let i = index" [ngClass]="{'activated-dot': currentPage === i}">
+  </button>
+</div>
